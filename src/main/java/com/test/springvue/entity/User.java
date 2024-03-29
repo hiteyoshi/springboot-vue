@@ -1,27 +1,37 @@
 package com.test.springvue.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
-public class User {
-
-    private String name;
-
-    private Integer age;
-
+@TableName("t_user")
+public class User implements Serializable {
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     private String username;
 
-    private LocalDate birthday;
-
     private String password;
 
-    public String getPassword() {
-        return password;
+    private LocalDate birthday;
+
+    private static final long serialVersionUID = 1L;
+
+    private Order order;
+
+    private List<Order> orders;
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public Integer getId() {
@@ -40,27 +50,42 @@ public class User {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public LocalDate getBirthday() {
         return birthday;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", username=").append(username);
+        sb.append(", password=").append(password);
+        sb.append(", birthday=").append(birthday);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

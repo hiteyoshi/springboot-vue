@@ -1,5 +1,7 @@
 package com.test.springvue.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.test.springvue.entity.User;
 import com.test.springvue.mapper.UserMapper;
 import io.swagger.annotations.ApiOperation;
@@ -33,7 +35,8 @@ public class UserController {
     }
     @GetMapping("/user")
     public List query(){
-        List<User> userList = userMapper.query();
+//        List<User> userList = userMapper.query();
+        List<User> userList = userMapper.selectList(null);
         System.out.println(userList);
         return userList;
     }
@@ -46,6 +49,17 @@ public class UserController {
         }else{
             return "false";
         }
+    }
+    @PostMapping("/user/findAll")
+    public List<User> findAll(){
+        return userMapper.selectAllUserAndOrders();
+    }
+
+    @PostMapping("/user/findByPage")
+    public IPage findByPage(){
+        Page<User> page = new Page<>(0,2);
+        IPage ipage= userMapper.selectPage(page,null);
+        return ipage;
     }
 }
 
