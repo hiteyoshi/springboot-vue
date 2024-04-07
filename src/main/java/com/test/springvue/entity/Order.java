@@ -3,6 +3,7 @@ package com.test.springvue.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class Order implements Serializable {
     private Integer id;
 
